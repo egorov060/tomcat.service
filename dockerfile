@@ -13,7 +13,6 @@ RUN apt install -y maven
 
 #ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 
-CMD ["bash"]
 #RUN apt update
 #RUN apt install -y git
 #RUN apt install -y maven
@@ -28,3 +27,4 @@ RUN cd boxfuse-sample-java-war-hello && mvn package && cd target && cp hello-1.0
 #RUN mv /root/boxfuse-sample-java-war-hello/target/hello-1.0.war /var/lib/tomcat9/webapps/hello-1.0.war
 #RUN cd target && cp hello-1.0.war /var/lib/tomcat9/webapps/
 EXPOSE 8080
+CMD ["bash"]
