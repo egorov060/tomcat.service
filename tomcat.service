@@ -1,0 +1,23 @@
+[Unit]
+Description=Tomcat 9 servlet container
+After=network.target
+
+[Service]
+Type=forking
+
+User=tomcat
+Group=tomcat
+
+Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
+Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
+
+Environment="CATALINA_BASE=/opt/apache-tomcat-10.0.23"
+Environment="CATALINA_HOME=/opt/apache-tomcat-10.0.23"
+Environment="CATALINA_PID=/opt/apache-tomcat-10.0.23/temp/tomcat.pid"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+ExecStart=/opt/apache-tomcat-10.0.23/bin/startup.sh
+ExecStop=/opt/apache-tomcat-10.0.23/bin/shutdown.sh
+
+[Install]
+WantedBy=multi-user.target
