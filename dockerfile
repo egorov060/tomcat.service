@@ -4,13 +4,19 @@ RUN apt install -y default-jdk
 #RUN apt install -y tomcat9
 RUN apt install -y git
 RUN apt install -y maven
+RUN apt install -y wget
 
-useradd -m -U -d /opt/tomcat -s /bin/false tomcat
-RUN wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz -P /tmp && tar -xf /tmp/apache-tomcat-10.0.23.tar.gz -C /opt/
+RUN useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+#RUN wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz -P /tmp
+RUN cd /tmp
+RUN git clone https://github.com/egorov060/docker.git
+
+RUN tar -xf /tmp/docker/apache-tomcat-10.0.23.tar.gz -C /opt/
+RUN cd docker && cp tomcat.service /etc/systemd/system/
 RUN chown -R tomcat: /opt/apache-tomcat-10.0.23/
 RUN sh -c 'chmod +x /opt/apache-tomcat-10.0.23/bin/*.sh'
-RUN git clone https://github.com/egorov060/docker.git
-RUN cd docker && cp tomcat.service /etc/systemd/system/
+
+
 RUN systemctl daemon-reload
 RUN systemctl enable tomcat
 
