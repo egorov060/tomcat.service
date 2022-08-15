@@ -1,4 +1,3 @@
-FROM ubuntu:20.04
 RUN apt update
 RUN apt install -y default-jdk
 #RUN apt install -y tomcat9
@@ -18,9 +17,9 @@ ENV CATALINA_HOME:   /opt/apache-tomcat-10.0.23
 ENV CATALINA_TMPDIR: /opt/apache-tomcat-10.0.23/temp
 ENV JRE_HOME:        /usr
 ENV CLASSPATH:       /opt/apache-tomcat-10.0.23t/bin/bootstrap.jar:/opt/apache-tomcat-10.0.23/bin/tomcat-juli.jar
-RUN cd /root
-RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-RUN cd boxfuse-sample-java-war-hello && mvn package && cd target && cp hello-1.0.war /opt/apache-tomcat-10.0.23/webapps
+#RUN cd /root
+#RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+#RUN cd boxfuse-sample-java-war-hello && mvn package && cd target && cp hello-1.0.war /opt/apache-tomcat-10.0.23/webapps
+COPY hello-1.0.war /opt/apache-tomcat-10.0.23/webapps/hello-1.0.war
 EXPOSE 8080
 CMD ["/opt/apache-tomcat-10.0.23/bin/catalina.sh", "run", "java","bash"]
-
